@@ -18,4 +18,4 @@ if (canvContext == null) {
 
 //Instantiate the player
 var player = new Player(100, 100, 30, 'blue');
-console.log(player);
+player.draw(canvContext);

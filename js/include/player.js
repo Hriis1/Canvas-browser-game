@@ -11,7 +11,11 @@ export class Player {
         this.color = color;
     }
 
+    //Draw the player
     draw(canvasContext) {
+        canvasContext.beginPath();
+        canvasContext.arc(this.x,this.y,this.radius,0,Math.PI*2, false);
 
+        canvasContext.fill();
     }
 }
