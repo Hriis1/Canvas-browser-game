@@ -1,13 +1,21 @@
+import { Player } from './include/player.js';
+
 //Select the canvas
-const canvas = document.querySelector("canvas");
+var canvas = document.querySelector("canvas");
+if (canvas == null) {
+    throw new Error("Something went wrong with creating the canvas!");
+}
 
 //Set its width and height to the full width and height of the page
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 //The canvus context
-const canvContext = canvas.getContext('2d');
+var canvContext = canvas.getContext('2d');
+if (canvContext == null) {
+    throw new Error("Canvas context is null!");
+}
 
 //Instantiate the player
-const player = new Player(100,100, 30, 'blue');
-
+var player = new Player(100, 100, 30, 'blue');
+console.log(player);

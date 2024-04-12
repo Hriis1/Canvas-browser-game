@@ -10,8 +10,7 @@
 
 <body>
     <canvas></canvas>
-    <script src="js/player.js"></script>
-    <script src="js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
