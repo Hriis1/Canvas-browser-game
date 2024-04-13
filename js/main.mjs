@@ -22,6 +22,7 @@ var player = new Player(canvas.width / 2, canvas.height / 2, 30, 'blue');
 player.draw(canvContext);
 
 //Listen for click event
-window.addEventListener('click', () => {
-    console.log("Click registered");
+window.addEventListener('click', (event) => {
+    const projectile = new Projectile(event.clientX, event.clientY, 10, 'red', 20);
+    projectile.draw(canvContext);
 })
