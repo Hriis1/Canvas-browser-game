@@ -23,6 +23,16 @@ player.draw(canvContext);
 
 //Listen for click event
 window.addEventListener('click', (event) => {
-    const projectile = new Projectile(event.clientX, event.clientY, 10, 'red', 20);
+    const projectile = new Projectile(canvas.width / 2, canvas.height / 2, 5, 'red', 20);
     projectile.draw(canvContext);
-})
+});
+
+//Update function to update for every frame
+function update()
+{
+    //Update logic goes here
+
+    // Request the next frame
+    requestAnimationFrame(update);
+}
+update();
