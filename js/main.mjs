@@ -32,9 +32,10 @@ window.addEventListener('click', (event) => {
         x: Math.cos(angle),
         y: Math.sin(angle)
     }
+    const projSpeed = 3;
 
     //Push a projectile to the projectiles array
-    projectiles.push(new Projectile(player.x, player.y, 5, 'red', projVel));
+    projectiles.push(new Projectile(player.x, player.y, 5, 'red', projSpeed, projVel));
 });
 
 //Update function to update for every frame
@@ -50,7 +51,7 @@ function update() {
     //Draw logic goes here
 
     //Clear the cavnas
-    canvContext.clearRect(0,0, canvas.width, canvas.height);
+    canvContext.clearRect(0, 0, canvas.width, canvas.height);
 
     //Draw the player
     player.draw(canvContext);

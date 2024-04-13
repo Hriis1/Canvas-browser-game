@@ -1,10 +1,13 @@
 import Entity from './entity.mjs';
 
 class Projectile extends Entity {
+
+    speed;
     velocity;
 
-    constructor(x, y, radius, color, velocity) {
+    constructor(x, y, radius, color, speed, velocity) {
         super(x, y, radius, color);
+        this.speed = speed;
         this.velocity = velocity;
 
     }
@@ -12,8 +15,8 @@ class Projectile extends Entity {
     update() {
 
         //Update the position
-        this.x += this.velocity.x;
-        this.y += this.velocity.y;
+        this.x += this.velocity.x * this.speed;
+        this.y += this.velocity.y * this.speed;
     }
 
     //Draw the player
