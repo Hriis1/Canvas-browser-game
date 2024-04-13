@@ -1,4 +1,4 @@
-import { Player } from './include/player.js';
+import Player from './include/player.mjs';
 
 //Select the canvas
 var canvas = document.querySelector("canvas");
@@ -17,5 +17,5 @@ if (canvContext == null) {
 }
 
 //Instantiate the player
-var player = new Player(100, 100, 30, 'blue');
+var player = new Player(innerWidth / 2, innerHeight / 2, 30, 'blue');
 player.draw(canvContext);

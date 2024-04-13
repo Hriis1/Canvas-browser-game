@@ -1,4 +1,4 @@
-export class Player {
+class Player {
     x;
     y;
     radius;
@@ -26,3 +26,5 @@ export class Player {
         canvasContext.fill();
     }
 }
+
+export default Player;
