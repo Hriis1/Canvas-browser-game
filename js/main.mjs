@@ -27,12 +27,11 @@ let projectiles = [];
 //Listen for click event
 window.addEventListener('click', (event) => {
     //Create and push a projectile to the projectiles array
-    const projectile = new Projectile(player.x, player.y, 5, 'red',
+    projectiles.push(new Projectile(player.x, player.y, 5, 'red',
         {
             x: 2,
             y: 1
-        });
-    projectiles.push(projectile);
+        }));
 });
 
 //Update function to update for every frame
