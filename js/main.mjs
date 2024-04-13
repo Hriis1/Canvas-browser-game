@@ -21,16 +21,36 @@ if (canvContext == null) {
 var player = new Player(canvas.width / 2, canvas.height / 2, 30, 'blue');
 player.draw(canvContext);
 
+//Projectiles array
+let projectiles = [];
+
 //Listen for click event
 window.addEventListener('click', (event) => {
-    const projectile = new Projectile(canvas.width / 2, canvas.height / 2, 5, 'red', null);
-    projectile.draw(canvContext);
+    //Create and push a projectile to the projectiles array
+    const projectile = new Projectile(player.x, player.y, 5, 'red',
+        {
+            x: 2,
+            y: 1
+        });
+    projectiles.push(projectile);
 });
 
 //Update function to update for every frame
-function update()
-{
+function update() {
     //Update logic goes here
+
+    //Update the projectiles
+    projectiles.forEach(projectile => {
+        projectile.update();
+        projectile.draw(canvContext);
+    });
+
+    //Draw logic goes here
+
+    //Draw the projectiles
+    projectiles.forEach(projectile => {
+        projectile.draw(canvContext);
+    });
 
     // Request the next frame
     requestAnimationFrame(update);
