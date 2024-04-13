@@ -19,7 +19,6 @@ if (canvContext == null) {
 
 //Instantiate the player
 var player = new Player(canvas.width / 2, canvas.height / 2, 30, 'blue');
-player.draw(canvContext);
 
 //Projectiles array
 let projectiles = [];
@@ -49,6 +48,12 @@ function update() {
     });
 
     //Draw logic goes here
+
+    //Clear the cavnas
+    canvContext.clearRect(0,0, canvas.width, canvas.height);
+
+    //Draw the player
+    player.draw(canvContext);
 
     //Draw the projectiles
     projectiles.forEach(projectile => {
