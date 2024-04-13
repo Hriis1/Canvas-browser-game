@@ -23,7 +23,7 @@ player.draw(canvContext);
 
 //Listen for click event
 window.addEventListener('click', (event) => {
-    const projectile = new Projectile(canvas.width / 2, canvas.height / 2, 5, 'red', 20);
+    const projectile = new Projectile(canvas.width / 2, canvas.height / 2, 5, 'red', null);
     projectile.draw(canvContext);
 });
 

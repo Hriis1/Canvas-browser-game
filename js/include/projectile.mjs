@@ -1,7 +1,6 @@
 import Entity from './entity.mjs';
 
-class Projectile extends Entity
-{
+class Projectile extends Entity {
     velocity;
 
     constructor(x, y, radius, color, velocity) {
@@ -10,12 +9,19 @@ class Projectile extends Entity
 
     }
 
+    update() {
+
+        //Update the position
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+    }
+
     //Draw the player
     draw(canvasContext) {
 
         //Sepecify a circle shape at x and y with radius
         canvasContext.beginPath();
-        canvasContext.arc(this.x,this.y,this.radius,0,Math.PI*2, false);
+        canvasContext.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 
         //Draw with rh players color
         canvasContext.fillStyle = this.color;
