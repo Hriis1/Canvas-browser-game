@@ -1,14 +1,9 @@
-class Player {
-    x;
-    y;
-    radius;
-    color;
+import Entity from './entity.mjs';
+
+class Player extends Entity {
 
     constructor(x, y, radius, color) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.color = color;
+        super(x, y, radius, color);
     }
 
     //Draw the player
