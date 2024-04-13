@@ -26,12 +26,16 @@ let projectiles = [];
 
 //Listen for click event
 window.addEventListener('click', (event) => {
-    //Create and push a projectile to the projectiles array
-    projectiles.push(new Projectile(player.x, player.y, 5, 'red',
-        {
-            x: 2,
-            y: 1
-        }));
+
+    //Get the x and y velocity of the projectile based on pos clicked
+    const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x);
+    const projVel = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }
+
+    //Push a projectile to the projectiles array
+    projectiles.push(new Projectile(player.x, player.y, 5, 'red', projVel));
 });
 
 //Update function to update for every frame
