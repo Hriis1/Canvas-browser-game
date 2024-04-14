@@ -24,6 +24,9 @@ var player = new Player(canvas.width / 2, canvas.height / 2, 30, 'blue');
 //Projectiles array
 let projectiles = [];
 
+//Enemies array
+let enemies = [];
+
 //Listen for click event
 window.addEventListener('click', (event) => {
 
@@ -41,7 +44,20 @@ window.addEventListener('click', (event) => {
 
 function spawnEnemies() {
     setInterval(() => {
-        console.log("Spawning enemies!");
+        //Get the x and y velocity of the enemy based on pos its spawn position
+        const enemyPos = {
+            x: 100,
+            y: 100
+        }
+        const angle = Math.atan2(player.y - enemyPos.y, player.x - enemyPos.x);
+        const enemyVel = {
+            x: Math.cos(angle),
+            y: Math.sin(angle)
+        }
+        const enemySpeed = 3;
+
+        //Push an enemy to the enemies array
+        enemies.push(new Enemy(enemyPos.x, enemyPos.y, 10, 'yellow', enemySpeed, enemyVel));
     }, 1000);
 }
 
@@ -52,6 +68,11 @@ function update() {
     //Update the projectiles
     projectiles.forEach(projectile => {
         projectile.update();
+    });
+
+    //Update the enemies
+    enemies.forEach(enemy => {
+        enemy.update();
     });
 
     //Draw logic goes here
@@ -65,6 +86,11 @@ function update() {
     //Draw the projectiles
     projectiles.forEach(projectile => {
         projectile.draw(canvContext);
+    });
+
+    //Draw the enemies
+    enemies.forEach(enemy => {
+        enemy.draw(canvContext);
     });
 
     // Request the next frame
