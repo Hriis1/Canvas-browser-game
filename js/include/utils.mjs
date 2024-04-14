@@ -41,6 +41,11 @@ class Utils {
         //If the distance is less than the sum of radiuses then they are colliding
         return dist < circle1.radius + circle2.radius;
     }
+
+    static checkForCircleRectCollision(circle, rectX, rectY, rectW, rectH) {
+        return circle.x + circle.radius > rectX && circle.x - circle.radius < rectX + rectW
+            && circle.y + circle.radius > rectY && circle.y - circle.radius < rectY + rectH;
+    }
 }
 
 export default Utils;

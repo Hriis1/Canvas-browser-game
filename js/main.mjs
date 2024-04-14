@@ -85,8 +85,15 @@ function update() {
     //Update logic goes here
 
     //Update the projectiles
-    projectiles.forEach(projectile => {
+    projectiles.forEach((projectile, projIdx) => {
         projectile.update();
+
+        //Check if projectiles are outside of the screen
+        if(!Utils.checkForCircleRectCollision(projectile, 0, 0, canvas.width, canvas.height))
+        {
+            //Remove the projectile if its outside of screen
+            projectiles.splice(projIdx, 1);
+        }
     });
 
     //Update the enemies
@@ -109,6 +116,13 @@ function update() {
                 projectiles.splice(projIdx, 1);
                 break;
             }
+        }
+
+        //Check if enemies are outside of the screen
+        if(!Utils.checkForCircleRectCollision(enemy, 0, 0, canvas.width, canvas.height))
+        {
+            //Remove the enemy if its outside of screen
+            enemies.splice(enemyIdx, 1);
         }
     });
 
