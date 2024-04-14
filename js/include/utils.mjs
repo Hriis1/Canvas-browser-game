@@ -39,7 +39,7 @@ class Utils {
         const dist = Math.hypot(circle1.x - circle2.x, circle1.y - circle2.y);
 
         //If the distance is less than the sum of radiuses then they are colliding
-        return dist < circle1.radius - circle2.radius;
+        return dist < circle1.radius + circle2.radius;
     }
 }
 
