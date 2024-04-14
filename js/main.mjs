@@ -10,8 +10,8 @@ if (canvas == null) {
 }
 
 //Set its width and height to the full width and height of the page
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.width = innerWidth - 5;
+canvas.height = innerHeight - 5;
 
 //The canvus context
 var canvContext = canvas.getContext('2d');
@@ -21,6 +21,8 @@ if (canvContext == null) {
 
 //Instantiate the player
 var player = new Player(canvas.width / 2, canvas.height / 2, 40, 'blue');
+
+let gameOver = false;
 
 //Projectiles array
 let projectiles = [];
@@ -41,6 +43,20 @@ window.addEventListener('click', (event) => {
 
     //Push a projectile to the projectiles array
     projectiles.push(new Projectile(player.x, player.y, 10, 'red', projSpeed, projVel));
+});
+
+window.addEventListener('keypress', function (event) {
+    // Check if the key pressed is the one you're interested in
+    if (event.key === ' ') {
+        if(gameOver) {
+            //If space is pressed and gameOver is true reset the game
+            enemies = [];
+            projectiles = [];
+            gameOver = false;
+            update();
+        }
+        
+    }
 });
 
 function spawnEnemies() {
@@ -77,9 +93,10 @@ function update() {
     enemies.forEach((enemy, enemyIdx) => {
         enemy.update();
 
-        if(Utils.checkForCircularCollision(player, enemy))
-        {
+        //Check if an enemy collides with the player
+        if (Utils.checkForCircularCollision(player, enemy)) {
             console.log("Game Over!");
+            gameOver = true;
         }
 
         //Check for collision with all projectiles
@@ -114,7 +131,9 @@ function update() {
     });
 
     // Request the next frame
-    requestAnimationFrame(update);
+    if (!gameOver) {
+        requestAnimationFrame(update);
+    }
 }
 
 //Call the functions that happen overtime
