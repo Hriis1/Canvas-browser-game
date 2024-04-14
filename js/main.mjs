@@ -77,6 +77,11 @@ function update() {
     enemies.forEach((enemy, enemyIdx) => {
         enemy.update();
 
+        if(Utils.checkForCircularCollision(player, enemy))
+        {
+            console.log("Game Over!");
+        }
+
         //Check for collision with all projectiles
         for (let projIdx = 0; projIdx < projectiles.length; projIdx++) {
             const projectile = projectiles[projIdx];
