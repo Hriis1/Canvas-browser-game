@@ -60,7 +60,7 @@ function spawnEnemies() {
         const enemySize = Math.random() * 15 + 15;
 
         //Push an enemy to the enemies array
-        //enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, 'green', enemySpeed, enemyVel));
+        enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, 'green', enemySpeed, enemyVel));
     }, 1000);
 }
 
