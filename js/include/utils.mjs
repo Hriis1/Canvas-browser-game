@@ -33,3 +33,5 @@ class Utils {
         return { x, y };
     }
 }
+
+export default Utils;

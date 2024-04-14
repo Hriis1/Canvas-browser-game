@@ -46,10 +46,7 @@ window.addEventListener('click', (event) => {
 function spawnEnemies() {
     setInterval(() => {
         //Get the x and y velocity of the enemy based on pos its spawn position
-        const enemyPos = {
-            x: 100,
-            y: 100
-        }
+        const enemyPos = Utils.generateRandomEdgePosition(0, 0, canvas.width, canvas.height);
         const angle = Math.atan2(player.y - enemyPos.y, player.x - enemyPos.x);
         const enemyVel = {
             x: Math.cos(angle),
