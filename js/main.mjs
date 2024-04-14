@@ -1,6 +1,7 @@
 import Player from './include/player.mjs';
 import Projectile from './include/projectile.mjs';
 import Enemy from './include/enemy.mjs';
+import Utils from './include/utils.mjs';
 
 //Select the canvas
 var canvas = document.querySelector("canvas");
