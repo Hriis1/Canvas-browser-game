@@ -45,7 +45,6 @@ function update() {
     //Update the projectiles
     projectiles.forEach(projectile => {
         projectile.update();
-        projectile.draw(canvContext);
     });
 
     //Draw logic goes here
