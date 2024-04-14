@@ -1,5 +1,6 @@
 import Player from './include/player.mjs';
 import Projectile from './include/projectile.mjs';
+import Enemy from './include/enemy.mjs';
 
 //Select the canvas
 var canvas = document.querySelector("canvas");
@@ -38,6 +39,12 @@ window.addEventListener('click', (event) => {
     projectiles.push(new Projectile(player.x, player.y, 5, 'red', projSpeed, projVel));
 });
 
+function spawnEnemies() {
+    setInterval(() => {
+        console.log("Spawning enemies!");
+    }, 1000);
+}
+
 //Update function to update for every frame
 function update() {
     //Update logic goes here
@@ -63,4 +70,7 @@ function update() {
     // Request the next frame
     requestAnimationFrame(update);
 }
+
+//Call the functions that happen overtime
+spawnEnemies();
 update();
