@@ -52,10 +52,15 @@ function spawnEnemies() {
             x: Math.cos(angle),
             y: Math.sin(angle)
         }
+
+        //Get the speed of the enemy
         const enemySpeed = 3;
 
+        //Get the size of the enemy between 5 and 20
+        const enemySize = Math.random() * 15 + 5;
+
         //Push an enemy to the enemies array
-        enemies.push(new Enemy(enemyPos.x, enemyPos.y, 10, 'yellow', enemySpeed, enemyVel));
+        enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, 'green', enemySpeed, enemyVel));
     }, 1000);
 }
 
