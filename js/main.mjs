@@ -74,16 +74,20 @@ function update() {
     });
 
     //Update the enemies
-    enemies.forEach(enemy => {
+    enemies.forEach((enemy, enemyIdx) => {
         enemy.update();
 
         //Check for collision with all projectiles
-        for (const projectile of projectiles) {
+        for (let projIdx = 0; projIdx < projectiles.length; projIdx++) {
+            const projectile = projectiles[projIdx];
+
             if (Utils.checkForCircularCollision(projectile, enemy)) {
-                console.log("Collision detected!");
+                //If collision is detected remove both the projectile and the enemy
+                enemies.splice(enemyIdx, 1);
+                projectiles.splice(projIdx, 1);
                 break;
             }
-        };
+        }
     });
 
     //Draw logic goes here
