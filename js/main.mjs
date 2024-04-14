@@ -56,11 +56,11 @@ function spawnEnemies() {
         //Get the speed of the enemy
         const enemySpeed = 3;
 
-        //Get the size of the enemy between 5 and 20
+        //Get the size of the enemy between 15 and 30
         const enemySize = Math.random() * 15 + 15;
 
         //Push an enemy to the enemies array
-        enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, 'green', enemySpeed, enemyVel));
+        //enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, 'green', enemySpeed, enemyVel));
     }, 1000);
 }
 
