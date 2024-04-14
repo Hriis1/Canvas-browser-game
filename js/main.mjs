@@ -20,7 +20,7 @@ if (canvContext == null) {
 }
 
 //Instantiate the player
-var player = new Player(canvas.width / 2, canvas.height / 2, 30, 'blue');
+var player = new Player(canvas.width / 2, canvas.height / 2, 40, 'blue');
 
 //Projectiles array
 let projectiles = [];
@@ -37,10 +37,10 @@ window.addEventListener('click', (event) => {
         x: Math.cos(angle),
         y: Math.sin(angle)
     }
-    const projSpeed = 3;
+    const projSpeed = 7;
 
     //Push a projectile to the projectiles array
-    projectiles.push(new Projectile(player.x, player.y, 5, 'red', projSpeed, projVel));
+    projectiles.push(new Projectile(player.x, player.y, 10, 'red', projSpeed, projVel));
 });
 
 function spawnEnemies() {
@@ -57,7 +57,7 @@ function spawnEnemies() {
         const enemySpeed = 3;
 
         //Get the size of the enemy between 5 and 20
-        const enemySize = Math.random() * 15 + 5;
+        const enemySize = Math.random() * 15 + 15;
 
         //Push an enemy to the enemies array
         enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, 'green', enemySpeed, enemyVel));
