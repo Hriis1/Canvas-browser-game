@@ -128,8 +128,9 @@ function update() {
 
     //Draw logic goes here
 
-    //Clear the cavnas
-    canvContext.clearRect(0, 0, canvas.width, canvas.height);
+    //Clear the cavnas with the specified color
+    canvContext.fillStyle = 'rgba(0,0,0,0.2)';
+    canvContext.fillRect(0, 0, canvas.width, canvas.height);
 
     //Draw the player
     player.draw(canvContext);
