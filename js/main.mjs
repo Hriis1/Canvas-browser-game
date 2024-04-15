@@ -20,7 +20,7 @@ if (canvContext == null) {
 }
 
 //Instantiate the player
-var player = new Player(canvas.width / 2, canvas.height / 2, 40, 'blue');
+var player = new Player(canvas.width / 2, canvas.height / 2, 40, 'rgba(235, 25, 250, 1)');
 
 let gameOver = false;
 
@@ -48,14 +48,14 @@ window.addEventListener('click', (event) => {
 window.addEventListener('keypress', function (event) {
     // Check if the key pressed is the one you're interested in
     if (event.key === ' ') {
-        if(gameOver) {
+        if (gameOver) {
             //If space is pressed and gameOver is true reset the game
             enemies = [];
             projectiles = [];
             gameOver = false;
             update();
         }
-        
+
     }
 });
 
@@ -75,8 +75,19 @@ function spawnEnemies() {
         //Get the size of the enemy between 15 and 30
         const enemySize = Math.random() * 15 + 15;
 
+        //Get enemy color
+        const enemyColors = [
+            'rgba(65, 250, 55, 1)',//light green
+            'rgba(18, 251, 255, 1)', //light blue
+            'rgba(82, 66, 255, 1)', //water blue
+            'rgba(255, 8, 119, 1)', //dark pink
+            'rgba(255, 116, 3, 1)', //strong orange
+        ];
+
+        const enemyColorIdx = Math.floor(Math.random() * 4);
+
         //Push an enemy to the enemies array
-        enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, 'green', enemySpeed, enemyVel));
+        enemies.push(new Enemy(enemyPos.x, enemyPos.y, enemySize, enemyColors[enemyColorIdx], enemySpeed, enemyVel));
     }, 1000);
 }
 
@@ -89,8 +100,7 @@ function update() {
         projectile.update();
 
         //Check if projectiles are outside of the screen
-        if(!Utils.checkForCircleRectCollision(projectile, 0, 0, canvas.width, canvas.height))
-        {
+        if (!Utils.checkForCircleRectCollision(projectile, 0, 0, canvas.width, canvas.height)) {
             //Remove the projectile if its outside of screen
             projectiles.splice(projIdx, 1);
         }
@@ -119,8 +129,7 @@ function update() {
         }
 
         //Check if enemies are outside of the screen
-        if(!Utils.checkForCircleRectCollision(enemy, 0, 0, canvas.width, canvas.height))
-        {
+        if (!Utils.checkForCircleRectCollision(enemy, 0, 0, canvas.width, canvas.height)) {
             //Remove the enemy if its outside of screen
             enemies.splice(enemyIdx, 1);
         }
