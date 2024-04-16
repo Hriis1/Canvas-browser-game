@@ -148,9 +148,16 @@ function update() {
                 //If collision is detected reduce the radius of enemy and if its below a certain amount kill it
 
                 //Spawn particles
-                const particlesAmount = 10;
+                const particlesAmount = 12;
+                let particleVelocity = null;
+                let particleRadius = null;
+                let particleSpeed = null;
                 for (let index = 0; index < particlesAmount; index++) {
-                    particles.push(new Particle(projectile.x, projectile.y, 5, enemy.color, 5, { x: Math.random() - 0.5, y: Math.random() - 0.5 }));
+                    particleVelocity = { x: Math.random() - 0.5, y: Math.random() - 0.5 };
+                    particleRadius = (Math.random() * 4) + 1;
+                    particleSpeed = (Math.random() * 7) + 3;
+                    
+                    particles.push(new Particle(projectile.x, projectile.y, particleRadius, enemy.color, particleSpeed, particleVelocity));
                 }
 
                 //Remove the projetile
