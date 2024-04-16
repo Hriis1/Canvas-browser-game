@@ -1,6 +1,7 @@
 import Player from './include/player.mjs';
 import Projectile from './include/projectile.mjs';
 import Enemy from './include/enemy.mjs';
+import Particle from './include/particle.mjs';
 import Utils from './include/utils.mjs';
 
 //Select the canvas
@@ -29,6 +30,9 @@ let projectiles = [];
 
 //Enemies array
 let enemies = [];
+
+//particles array
+let particles = [];
 
 //Listen for click event
 window.addEventListener('click', (event) => {
@@ -63,6 +67,7 @@ window.addEventListener('keypress', function (event) {
             //If space is pressed and gameOver is true reset the game
             enemies = [];
             projectiles = [];
+            particles = [];
             gameOver = false;
             update();
         }
@@ -142,6 +147,12 @@ function update() {
             if (Utils.checkForCircularCollision(projectile, enemy)) {
                 //If collision is detected reduce the radius of enemy and if its below a certain amount kill it
 
+                //Spawn particles
+                const particlesAmount = 10;
+                for (let index = 0; index < particlesAmount; index++) {
+                    particles.push(new Particle(projectile.x, projectile.y, 5, enemy.color, 5, { x: Math.random() - 0.5, y: Math.random() - 0.5 }));
+                }
+
                 //Remove the projetile
                 projectiles.splice(projIdx, 1);
 
@@ -152,8 +163,8 @@ function update() {
                 });
 
                 //Reduce and check with health coz it happens instantly
-                enemy.health-= projectile.damage;
-                
+                enemy.health -= projectile.damage;
+
                 //If enemy radius is less than 15 delete it
                 if (enemy.health <= 15) {
                     enemies.splice(enemyIdx, 1);
@@ -167,6 +178,18 @@ function update() {
             //Remove the enemy if its outside of screen
             enemies.splice(enemyIdx, 1);
         }
+    });
+
+    //Update particles
+    particles.forEach((particle, particleIdx) => {
+
+        particle.update();
+
+        //Check if enemies are outside of the screen
+        /* if (!Utils.checkForCircleRectCollision(particle, 0, 0, canvas.width, canvas.height)) {
+            //Remove the enemy if its outside of screen
+            particles.splice(particleIdx, 1);
+        } */
     });
 
     //Draw logic goes here
@@ -186,6 +209,11 @@ function update() {
     //Draw the enemies
     enemies.forEach(enemy => {
         enemy.draw(canvContext);
+    });
+
+    //Draw the particles
+    particles.forEach(particle => {
+        particle.draw(canvContext);
     });
 
     // Request the next frame
