@@ -50,7 +50,7 @@ window.addEventListener('click', (event) => {
     };
 
     //Push a projectile to the projectiles array
-    projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel));
+    projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel, 15));
 });
 
 window.addEventListener('keypress', function (event) {
@@ -77,11 +77,19 @@ function spawnEnemies() {
             y: Math.sin(angle)
         }
 
-        //Get the speed of the enemy
-        const enemySpeed = 3;
 
-        //Get the size of the enemy between 15 and 30
-        const enemySize = Math.random() * 15 + 15;
+        //Get the size of the enemy between 15 and 60
+        const enemySize = (Math.random() * 45) + 15;
+
+        //Get the speed of the enemy
+        let enemySpeed = 0;
+        if (enemySize < 30) {
+            enemySpeed = 4;
+        } else if (enemySize >= 30 && enemySize < 45) {
+            enemySpeed = 3;
+        } else {
+            enemySpeed = 2;
+        }
 
         //Get enemy color
         const enemyColors = [
@@ -129,9 +137,12 @@ function update() {
             const projectile = projectiles[projIdx];
 
             if (Utils.checkForCircularCollision(projectile, enemy)) {
-                //If collision is detected remove both the projectile and the enemy
-                enemies.splice(enemyIdx, 1);
+                //If collision is detected reduce the radius of enemy and if its below a certain amount kill it
                 projectiles.splice(projIdx, 1);
+                enemy.radius -= projectile.damage;
+                if (enemy.radius <= 15) {
+                    enemies.splice(enemyIdx, 1);
+                }
                 break;
             }
         }

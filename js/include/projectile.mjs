@@ -2,13 +2,15 @@ import DrawableCircle from './drawableCircle.mjs';
 
 class Projectile extends DrawableCircle {
 
+    damage;
     speed;
     velocity;
 
-    constructor(x, y, radius, color, speed, velocity) {
+    constructor(x, y, radius, color, speed, velocity, damage) {
         super(x, y, radius, color);
         this.speed = speed;
         this.velocity = velocity;
+        this.damage = damage;
 
     }
 
