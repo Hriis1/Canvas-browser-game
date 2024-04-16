@@ -1,6 +1,6 @@
-import Entity from './entity.mjs';
+import DrawableCircle from './drawableCircle.mjs';
 
-class Enemy extends Entity {
+class Enemy extends DrawableCircle {
 
     speed;
     velocity;

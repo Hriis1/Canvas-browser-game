@@ -1,4 +1,4 @@
-class Entity {
+class DrawableCircle {
     x;
     y;
     radius;
@@ -18,4 +18,4 @@ class Entity {
     }
 }
 
-export default Entity;
+export default DrawableCircle;
