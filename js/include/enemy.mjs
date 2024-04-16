@@ -4,11 +4,13 @@ class Enemy extends DrawableCircle {
 
     speed;
     velocity;
+    health;
 
     constructor(x, y, radius, color, speed, velocity) {
         super(x, y, radius, color);
         this.speed = speed;
         this.velocity = velocity;
+        this.health = radius;
 
     }
 

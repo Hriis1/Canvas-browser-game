@@ -49,8 +49,11 @@ window.addEventListener('click', (event) => {
         y: projY,
     };
 
+    //Get the projectile dmg
+    const projDmg = 15;
+
     //Push a projectile to the projectiles array
-    projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel, 15));
+    projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel, projDmg));
 });
 
 window.addEventListener('keypress', function (event) {
@@ -138,9 +141,21 @@ function update() {
 
             if (Utils.checkForCircularCollision(projectile, enemy)) {
                 //If collision is detected reduce the radius of enemy and if its below a certain amount kill it
+
+                //Remove the projetile
                 projectiles.splice(projIdx, 1);
-                enemy.radius -= projectile.damage;
-                if (enemy.radius <= 15) {
+
+                //Use the gsap lib to make a transition animation between the new and old enemy radius
+                gsap.to(enemy, {
+                    duration: 0.2,
+                    radius: enemy.radius - projectile.damage
+                });
+
+                //Reduce and check with health coz it happens instantly
+                enemy.health-= projectile.damage;
+                
+                //If enemy radius is less than 15 delete it
+                if (enemy.health <= 15) {
                     enemies.splice(enemyIdx, 1);
                 }
                 break;
