@@ -185,11 +185,11 @@ function update() {
 
         particle.update();
 
-        //Check if enemies are outside of the screen
-        /* if (!Utils.checkForCircleRectCollision(particle, 0, 0, canvas.width, canvas.height)) {
+        //Check if particles alpha is 0 or less
+        if (particle.alpha <= 0) {
             //Remove the enemy if its outside of screen
             particles.splice(particleIdx, 1);
-        } */
+        }
     });
 
     //Draw logic goes here
