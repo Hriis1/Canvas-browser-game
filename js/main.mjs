@@ -38,11 +38,19 @@ window.addEventListener('click', (event) => {
     const projVel = {
         x: Math.cos(angle),
         y: Math.sin(angle)
-    }
+    };
     const projSpeed = 7;
 
+    //Get the position at the edge of the player at the velocity(direction) of the projectile
+    const projX = player.x + player.radius * projVel.x;
+    const projY = player.y + player.radius * projVel.y;
+    const projSpawnPos = {
+        x: projX,
+        y: projY,
+    };
+
     //Push a projectile to the projectiles array
-    projectiles.push(new Projectile(player.x, player.y, 10, 'red', projSpeed, projVel));
+    projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel));
 });
 
 window.addEventListener('keypress', function (event) {
