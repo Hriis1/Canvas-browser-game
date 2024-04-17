@@ -94,27 +94,29 @@ function stopGame() {
 //Listen for click event
 window.addEventListener('click', (event) => {
 
-    //Get the x and y velocity of the projectile based on pos clicked
-    const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x);
-    const projVel = {
-        x: Math.cos(angle),
-        y: Math.sin(angle)
-    };
-    const projSpeed = 7;
+    if (!gameOver) {
+        //Get the x and y velocity of the projectile based on pos clicked
+        const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x);
+        const projVel = {
+            x: Math.cos(angle),
+            y: Math.sin(angle)
+        };
+        const projSpeed = 7;
 
-    //Get the position at the edge of the player at the velocity(direction) of the projectile
-    const projX = player.x + player.radius * projVel.x;
-    const projY = player.y + player.radius * projVel.y;
-    const projSpawnPos = {
-        x: projX,
-        y: projY,
-    };
+        //Get the position at the edge of the player at the velocity(direction) of the projectile
+        const projX = player.x + player.radius * projVel.x;
+        const projY = player.y + player.radius * projVel.y;
+        const projSpawnPos = {
+            x: projX,
+            y: projY,
+        };
 
-    //Get the projectile dmg
-    const projDmg = 15;
+        //Get the projectile dmg
+        const projDmg = 15;
 
-    //Push a projectile to the projectiles array
-    projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel, projDmg));
+        //Push a projectile to the projectiles array
+        projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel, projDmg));
+    }
 });
 
 window.addEventListener('keypress', function (event) {
