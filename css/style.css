@@ -17,3 +17,8 @@ body {
     height: 25vh; /* Set the height as 30% of the viewport height */
     z-index: 1; /* Ensure it's above the canvas */
 }
+
+.disabled {
+    display: none;
+    pointer-events: none; 
+}

@@ -26,6 +26,15 @@ let spawnEnemiesInterval;
 //Score text
 const scoreText = document.getElementById("scoreText");
 
+//Game over score text
+const gameOverScoreText = document.getElementById("gameOverScoreText");
+
+//Game over menu
+const gameOverMenu = document.getElementById("gameOverMenu");
+
+//Start game button
+const startGameBtn = document.getElementById("startGameBtn");
+
 //Instantiate the player
 var player = new Player(canvas.width / 2, canvas.height / 2, 40, 'rgba(235, 25, 250, 1)');
 
@@ -41,6 +50,46 @@ let enemies = [];
 
 //particles array
 let particles = [];
+
+//Functions to start and stop the game
+function startGame() {
+    //Reset entities arrays
+    enemies = [];
+    projectiles = [];
+    particles = [];
+
+    //Reset score
+    score = 0;
+    scoreText.innerText = score;
+
+    //Disable the game over menu
+    gameOverMenu.classList.add("disabled");
+
+    //Reset the game state
+    gameOver = false;
+    spawnEnemies();
+    update();
+}
+
+function stopGame() {
+
+    //Prints
+    console.log("Game Over!");
+    console.log(`Your score is: ${score}!`);
+
+    //Set the game over score text
+    gameOverScoreText.innerText = score;
+
+    //Enable the game over menu
+    gameOverMenu.classList.remove("disabled");
+
+    //Stop spawning enemies
+    clearInterval(spawnEnemiesInterval);
+
+    //Set the game over flag
+    gameOver = true;
+
+}
 
 //Listen for click event
 window.addEventListener('click', (event) => {
@@ -68,37 +117,6 @@ window.addEventListener('click', (event) => {
     projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel, projDmg));
 });
 
-//Functions to start and stop the game
-function startGame() {
-    //Reset entities arrays
-    enemies = [];
-    projectiles = [];
-    particles = [];
-
-    //Reset score
-    score = 0;
-    scoreText.innerText = score;
-
-    //Reset the game state
-    gameOver = false;
-    spawnEnemies();
-    update();
-}
-
-function stopGame() {
-
-    //Prints
-    console.log("Game Over!");
-    console.log(`Your score is: ${score}!`);
-
-    //Stop spawning enemies
-    clearInterval(spawnEnemiesInterval);
-
-    //Set the game over flag
-    gameOver = true;
-    
-}
-
 window.addEventListener('keypress', function (event) {
     // Check if the key pressed is the one you're interested in
     if (event.key === ' ') {
@@ -109,6 +127,11 @@ window.addEventListener('keypress', function (event) {
 
     }
 });
+
+//Start the game when the start game button is clicked
+startGameBtn.addEventListener('click', function () {
+    startGame();
+})
 
 function spawnEnemies() {
     spawnEnemiesInterval = setInterval(() => {

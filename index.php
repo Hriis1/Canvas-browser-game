@@ -11,7 +11,7 @@
 
 <body>
     <div class="fixed text-white text-2xl ml-3 mt-3"><span>Score: </span><span id="scoreText">0</span></div>
-    <div class="gameOverMenu" >
+    <div class="gameOverMenu disabled" id="gameOverMenu">
         <div class="bg-white max-w-md w-full p-6 text-center">
             <h1 id="gameOverScoreText" class="text-4xl font-bold">0</h1>
             <p class="text-gray-700">Points</p>
