@@ -1,3 +1,19 @@
 body {
     margin: 0px !important;
 }
+
+.gameOverMenu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33vw; /* Set the width as 50% of the viewport width */
+    height: 25vh; /* Set the height as 30% of the viewport height */
+    z-index: 1; /* Ensure it's above the canvas */
+}
