@@ -20,6 +20,9 @@ if (canvContext == null) {
     throw new Error("Canvas context is null!");
 }
 
+//Spawn enemies interval
+let spawnEnemiesInterval;
+
 //Score text
 const scoreText = document.getElementById("scoreText");
 
@@ -65,31 +68,50 @@ window.addEventListener('click', (event) => {
     projectiles.push(new Projectile(projSpawnPos.x, projSpawnPos.y, 10, 'red', projSpeed, projVel, projDmg));
 });
 
+//Functions to start and stop the game
+function startGame() {
+    //Reset entities arrays
+    enemies = [];
+    projectiles = [];
+    particles = [];
+
+    //Reset score
+    score = 0;
+    scoreText.innerText = score;
+
+    //Reset the game state
+    gameOver = false;
+    spawnEnemies();
+    update();
+}
+
+function stopGame() {
+
+    //Prints
+    console.log("Game Over!");
+    console.log(`Your score is: ${score}!`);
+
+    //Stop spawning enemies
+    clearInterval(spawnEnemiesInterval);
+
+    //Set the game over flag
+    gameOver = true;
+    
+}
+
 window.addEventListener('keypress', function (event) {
     // Check if the key pressed is the one you're interested in
     if (event.key === ' ') {
         if (gameOver) {
             //If space is pressed and gameOver is true reset the game
-
-            //Reset entities arrays
-            enemies = [];
-            projectiles = [];
-            particles = [];
-
-            //Reset score
-            score = 0;
-            scoreText.innerText = score;
-
-            //Reset the game state
-            gameOver = false;
-            update();
+            startGame();
         }
 
     }
 });
 
 function spawnEnemies() {
-    setInterval(() => {
+    spawnEnemiesInterval = setInterval(() => {
         //Get the x and y velocity of the enemy based on pos its spawn position
         const enemyPos = Utils.generateRandomEdgePosition(0, 0, canvas.width, canvas.height);
         const angle = Math.atan2(player.y - enemyPos.y, player.x - enemyPos.x);
@@ -149,9 +171,7 @@ function update() {
 
         //Check if an enemy collides with the player
         if (Utils.checkForCircularCollision(player, enemy)) {
-            console.log("Game Over!");
-            console.log(`Your score is: ${score}!`);
-            gameOver = true;
+            stopGame();
         }
 
         //Check for collision with all projectiles
@@ -170,7 +190,7 @@ function update() {
                     particleVelocity = { x: Math.random() - 0.5, y: Math.random() - 0.5 };
                     particleRadius = (Math.random() * 4) + 1;
                     particleSpeed = (Math.random() * 7) + 3;
-                    
+
                     particles.push(new Particle(projectile.x, projectile.y, particleRadius, enemy.color, particleSpeed, particleVelocity));
                 }
 
@@ -192,7 +212,7 @@ function update() {
                     enemies.splice(enemyIdx, 1);
 
                     //Give score
-                    score+=enemy.scoreGiven;
+                    score += enemy.scoreGiven;
 
                     //Update score text
                     scoreText.innerText = score;
