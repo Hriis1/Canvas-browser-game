@@ -20,6 +20,9 @@ if (canvContext == null) {
     throw new Error("Canvas context is null!");
 }
 
+//Score text
+const scoreText = document.getElementById("scoreText");
+
 //Instantiate the player
 var player = new Player(canvas.width / 2, canvas.height / 2, 40, 'rgba(235, 25, 250, 1)');
 
@@ -67,9 +70,17 @@ window.addEventListener('keypress', function (event) {
     if (event.key === ' ') {
         if (gameOver) {
             //If space is pressed and gameOver is true reset the game
+
+            //Reset entities arrays
             enemies = [];
             projectiles = [];
             particles = [];
+
+            //Reset score
+            score = 0;
+            scoreText.innerText = score;
+
+            //Reset the game state
             gameOver = false;
             update();
         }
@@ -182,6 +193,9 @@ function update() {
 
                     //Give score
                     score+=enemy.scoreGiven;
+
+                    //Update score text
+                    scoreText.innerText = score;
                 }
                 break;
             }
