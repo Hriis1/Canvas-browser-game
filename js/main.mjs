@@ -25,6 +25,8 @@ var player = new Player(canvas.width / 2, canvas.height / 2, 40, 'rgba(235, 25, 
 
 let gameOver = false;
 
+let score = 0;
+
 //Projectiles array
 let projectiles = [];
 
@@ -137,6 +139,7 @@ function update() {
         //Check if an enemy collides with the player
         if (Utils.checkForCircularCollision(player, enemy)) {
             console.log("Game Over!");
+            console.log(`Your score is: ${score}!`);
             gameOver = true;
         }
 
@@ -172,9 +175,13 @@ function update() {
                 //Reduce and check with health coz it happens instantly
                 enemy.health -= projectile.damage;
 
-                //If enemy radius is less than 15 delete it
+                //If enemy health is less than 15
                 if (enemy.health <= 15) {
+                    //Delete the enemy
                     enemies.splice(enemyIdx, 1);
+
+                    //Give score
+                    score+=enemy.scoreGiven;
                 }
                 break;
             }
